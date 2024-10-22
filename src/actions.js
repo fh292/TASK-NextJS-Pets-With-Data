@@ -32,3 +32,13 @@ export async function createPet(formData) {
   revalidatePath(`/pets/[id]`, "page");
   redirect(`/pets/${newPet.id}`);
 }
+
+export async function deletePet(id) {
+  const response = await fetch(`${baseUrl}/pets/${id}`, {
+    method: "DELETE",
+    headers,
+  });
+  revalidatePath("/pets");
+  revalidatePath(`/pets/[id]`, "page");
+  redirect(`/pets`);
+}
